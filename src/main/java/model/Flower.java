@@ -1,3 +1,5 @@
+package model;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -17,6 +19,9 @@ public class Flower {
 
     @DatabaseField
     private long heigh;
+
+    @DatabaseField
+    private Color color;
 
     public Flower(){
     }
