@@ -39,7 +39,7 @@ public class CityShopController {
         }
     }
 
-    public void create(@NotNull Context context) {
+    public static void create(@NotNull Context context) {
         CityShop cityShop = context.bodyAsClass(CityShop.class);
         try {
             dao.create(cityShop);
@@ -50,7 +50,7 @@ public class CityShopController {
         }
     }
 
-    public void delete(@NotNull Context context, @NotNull String s) {
+    public static void delete(@NotNull Context context, @NotNull String s) {
         long cityShopId = Long.valueOf(s);
         try {
             dao.deleteById(cityShopId);
@@ -60,7 +60,7 @@ public class CityShopController {
         }
     }
 
-    public void update(@NotNull Context context, @NotNull String s) {
+    public static void update(@NotNull Context context, @NotNull String s) {
         long cityShopId = Long.valueOf(s);
         CityShop newCityShop = context.bodyAsClass(CityShop.class);
         newCityShop.setCityShopId(cityShopId);

@@ -41,7 +41,7 @@ public class FlowerController {
         }
     }
 
-    public void create(@NotNull Context context) {
+    public static void create(@NotNull Context context) {
         Flower flower = context.bodyAsClass(Flower.class);
         try {
             dao.create(flower);
@@ -52,7 +52,7 @@ public class FlowerController {
         }
     }
 
-    public void delete(@NotNull Context context, @NotNull String s) {
+    public static void delete(@NotNull Context context, @NotNull String s) {
         long flowerId = Long.valueOf(s);
         try {
             dao.deleteById(flowerId);
@@ -62,7 +62,7 @@ public class FlowerController {
         }
     }
 
-    public void update(@NotNull Context context, @NotNull String s) {
+    public static void update(@NotNull Context context, @NotNull String s) {
         long flowerId = Long.valueOf(s);
         Flower newFlower = context.bodyAsClass(Flower.class);
         newFlower.setFlowerId(flowerId);

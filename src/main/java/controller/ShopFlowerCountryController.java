@@ -39,7 +39,7 @@ public class ShopFlowerCountryController {
         }
     }
 
-    public void create(@NotNull Context context) {
+    public static void create(@NotNull Context context) {
         ShopFlowerCountry shopFlowerCountry = context.bodyAsClass(ShopFlowerCountry.class);
         try {
             dao.create(shopFlowerCountry);
@@ -50,7 +50,7 @@ public class ShopFlowerCountryController {
         }
     }
 
-    public void delete(@NotNull Context context, @NotNull String s) {
+    public static void delete(@NotNull Context context, @NotNull String s) {
         long shopFlowerCountryId = Long.valueOf(s);
         try {
             dao.deleteById(shopFlowerCountryId);
@@ -60,7 +60,7 @@ public class ShopFlowerCountryController {
         }
     }
 
-    public void update(@NotNull Context context, @NotNull String s) {
+    public static void update(@NotNull Context context, @NotNull String s) {
         long countryCityId = Long.valueOf(s);
         ShopFlowerCountry newShopFlowerCountry = context.bodyAsClass(ShopFlowerCountry.class);
         newShopFlowerCountry.setShopFlowerCountryId(countryCityId);
