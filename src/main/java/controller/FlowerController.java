@@ -26,7 +26,7 @@ public class FlowerController {
         }
     }
 
-    public void getOne(@NotNull Context context, @NotNull String s) {
+    public static void getOne(@NotNull Context context, @NotNull String s) {
         long flowerId = Long.valueOf(s);
         try {
             Flower flower = dao.queryForId(flowerId);
@@ -35,6 +35,39 @@ public class FlowerController {
             } else {
                 context.status(Constants.NOT_FOUND_404);
             }
+        } catch (SQLException e) {
+            logger.error("Error occurred getting records");
+            context.status(Constants.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    public void create(@NotNull Context context) {
+        Flower flower = context.bodyAsClass(Flower.class);
+        try {
+            dao.create(flower);
+            context.status(Constants.CREATED_201);
+        } catch (SQLException e) {
+            logger.error("Error occurred saving record");
+            context.status(Constants.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    public void delete(@NotNull Context context, @NotNull String s) {
+        long flowerId = Long.valueOf(s);
+        try {
+            dao.deleteById(flowerId);
+        } catch (SQLException e) {
+            logger.error("Error occurred deleting records");
+            context.status(Constants.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    public void update(@NotNull Context context, @NotNull String s) {
+        long flowerId = Long.valueOf(s);
+        Flower newFlower = context.bodyAsClass(Flower.class);
+        newFlower.setFlowerId(flowerId);
+        try {
+            dao.update(newFlower);
         } catch (SQLException e) {
             logger.error("Error occurred getting records");
             context.status(Constants.INTERNAL_SERVER_ERROR_500);

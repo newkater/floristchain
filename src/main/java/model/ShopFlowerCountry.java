@@ -5,6 +5,9 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "shop-flower-country")
 public class ShopFlowerCountry {
+    @DatabaseField(generatedId = true)
+    private long shopFlowerCountryId;
+
     @DatabaseField
     private long shopId;
 
@@ -39,5 +42,13 @@ public class ShopFlowerCountry {
 
     public void setCountryId(long countryId) {
         this.countryId = countryId;
+    }
+
+    public long getShopFlowerCountryId() {
+        return shopFlowerCountryId;
+    }
+
+    public void setShopFlowerCountryId(long shopFlowerCountryId) {
+        this.shopFlowerCountryId = shopFlowerCountryId;
     }
 }

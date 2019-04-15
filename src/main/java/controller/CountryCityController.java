@@ -24,7 +24,7 @@ public class CountryCityController {
         }
     }
 
-    public void getOne(@NotNull Context context, @NotNull String s) {
+    public static void getOne(@NotNull Context context, @NotNull String s) {
         long flowerId = Long.valueOf(s);
         try {
             CountryCity countryCity = dao.queryForId(flowerId);
@@ -39,8 +39,41 @@ public class CountryCityController {
         }
     }
 
+    public void create(@NotNull Context context) {
+        CountryCity countryCity = context.bodyAsClass(CountryCity.class);
+        try {
+            dao.create(countryCity);
+            context.status(Constants.CREATED_201);
+        } catch (SQLException e) {
+            logger.error("Error occurred saving record");
+            context.status(Constants.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    public void delete(@NotNull Context context, @NotNull String s) {
+        long countryCityId = Long.valueOf(s);
+        try {
+            dao.deleteById(countryCityId);
+        } catch (SQLException e) {
+            logger.error("Error occurred deleting records");
+            context.status(Constants.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
+    public void update(@NotNull Context context, @NotNull String s) {
+        long countryCityId = Long.valueOf(s);
+        CountryCity newCountryCity = context.bodyAsClass(CountryCity.class);
+        newCountryCity.setCountryCityId(countryCityId);
+        try {
+            dao.update(newCountryCity);
+        } catch (SQLException e) {
+            logger.error("Error occurred getting records");
+            context.status(Constants.INTERNAL_SERVER_ERROR_500);
+        }
+    }
+
     static {
-        logger = LoggerFactory.getLogger(FlowerController.class);
+        logger = LoggerFactory.getLogger(CountryCityController.class);
         try {
             dao = DaoManager.createDao(DatabaseUtils.getSourse(), CountryCity.class);
         } catch (SQLException e) {
